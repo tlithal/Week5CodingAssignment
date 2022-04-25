@@ -1,3 +1,5 @@
+//Creates the class to hold the units that will be placed in the teams
+
 class Unit {
     constructor(uName, uClass, uElement)
     {
@@ -11,6 +13,8 @@ class Unit {
     }
 }
 
+//Creates the class that will hold the teams
+
 class Team {
     constructor(name)
     {
@@ -18,6 +22,7 @@ class Team {
         this.units = [];
     }
 
+    //Method to add units to the teams
     addUnits(unit)
     {
         if (unit instanceof Unit)
@@ -36,6 +41,7 @@ class Team {
     }
 }
 
+//Creates the class for the menu object
 class Menu {
     constructor()
     {
@@ -43,6 +49,7 @@ class Menu {
         this.selectedTeam = null;
     }
 
+    //Start method that gives the prompts for the user to use
     start() {
         let selection = this.showMainMenuOptions();
 
@@ -66,9 +73,11 @@ class Menu {
             selection = this.showMainMenuOptions();
         }
 
+        //Alert to signal the end of the prompt when the user exits
         alert('Thank you for using Team Creator!');
     }
 
+    //The menu options that the user will use to navigate the menu
     showMainMenuOptions() {
         return prompt(`
             1) Create New Team
@@ -79,6 +88,7 @@ class Menu {
             `)
     }
 
+    //The menu options once inside the "View Team" option
     showTeamMenuOptions(teamInfo) {
         return prompt(`
             1) Create Unit
@@ -89,6 +99,7 @@ class Menu {
             `);
     }
 
+    //Method to show all the teams currently in the array
     showTeams() {
         let teamString = '';
         if (this.teams.length > 0)
@@ -105,11 +116,13 @@ class Menu {
         }
     }
 
+    //Method to create a new team
     createTeam() {
         let name = prompt('Enter name for new team:');
         this.teams.push(new Team(name));
     }
 
+    //Method to view a selected team as well as prompt the user to edit the team by adding/deleting units
     viewTeam() {
         let index = prompt("Enter the index of the team you wish to view:");
         if(index > -1 && index < this.teams.length) {
@@ -133,6 +146,7 @@ class Menu {
         }
     }
 
+    //Method to delete teams from the array
     deleteTeam() {
         let index = prompt('Enter the index of the team you wish to delete:');
         if(index > -1 && index < this.teams.length) {
@@ -140,6 +154,7 @@ class Menu {
         }
     }
 
+    //Method to create a unit inside a selected team
     createUnit() {
         let name = prompt('Enter name of new unit:');
         let uClass = prompt('Enter class for new unit:');
@@ -147,6 +162,7 @@ class Menu {
         this.selectedTeam.units.push(new Unit(name, uClass, uElement));
     }
 
+    //Method to delete a unit inside a selected team
     deleteUnit() {
         let index = prompt('Enter the index of the unit you wish to delete:');
         if (index > -1 && index < this.selectedTeam.units.length) {
